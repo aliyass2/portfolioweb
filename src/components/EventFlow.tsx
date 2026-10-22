@@ -40,7 +40,7 @@ export function EventFlow() {
       <div className="flex flex-col border-t border-line px-3.5 py-3 text-[10.5px] leading-[1.7] text-muted">
         {log.map(([t, msg, hot]) => (
           <div key={t}>
-            <span className="text-dim">{t}</span> {msg}
+            <span>{t}</span> <span className="text-text">{msg}</span>
             {hot && <span className="text-accent">{hot}</span>}
           </div>
         ))}

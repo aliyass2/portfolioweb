@@ -65,7 +65,7 @@ Colors (dark only; no light theme in v1):
 | line-2   | #2A3542 | stronger borders, button outline |
 | text     | #E6EBF0 | primary text |
 | muted    | #8A96A3 | secondary text (passes 4.5:1 on ground) |
-| dim      | #4E5A66 | tertiary mono labels, timestamps |
+| dim      | #4E5A66 | decorative only (placeholder text, borders). Fails contrast (~2.7:1): never use it for readable text. The artboards do, but the build uses `muted` there |
 | accent   | #F0A23B | "signal amber" — the ONLY accent. Marks active state, live span, CTA. Never a large fill except the primary button. |
 
 Type:

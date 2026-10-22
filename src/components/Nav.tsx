@@ -60,10 +60,9 @@ export function Nav() {
           <button
             type="button"
             onClick={openTerminal}
-            aria-label="Open terminal (Command K)"
-            className="rounded-[3px] border border-line px-2 py-1 font-mono text-[10.5px] tracking-[0.06em] text-dim hover:border-line-2 hover:text-accent"
+            className="rounded-[3px] border border-line px-2 py-1 font-mono text-[10.5px] tracking-[0.06em] text-muted hover:border-line-2 hover:text-accent"
           >
-            ⌘K
+            ⌘K<span className="sr-only"> open terminal</span>
           </button>
         </nav>
         <button

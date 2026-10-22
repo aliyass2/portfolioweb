@@ -250,7 +250,7 @@ export function Terminal() {
             <span className="size-2 rounded-full bg-accent" />
           </span>
           <span>ali@portfolio — zsh</span>
-          <span className="text-dim">type help</span>
+          <span>type help</span>
         </div>
         <div className="flex min-h-0 flex-1 flex-col justify-end p-4 text-[12.5px] leading-[1.75]">
           {output}
@@ -264,7 +264,6 @@ export function Terminal() {
       <button
         type="button"
         onClick={openTerminal}
-        aria-label={`Open terminal, current directory ${label}`}
         className={
           "fixed z-40 flex h-10 items-center gap-2.5 border border-line-2 bg-surface px-3.5 font-mono text-xs text-muted hover:border-accent motion-safe:animate-dock " +
           (isPhone
@@ -272,10 +271,11 @@ export function Terminal() {
             : "right-7 bottom-7 rounded-[20px]")
         }
       >
+        <span className="sr-only">Open terminal, current directory</span>
         <span className="size-[7px] rounded-full bg-accent" aria-hidden />
-        <span className="text-accent">➜</span>
+        <span className="text-accent" aria-hidden>➜</span>
         <span>{label}</span>
-        <span className="pl-1.5 text-[10.5px] tracking-[0.06em] text-dim">
+        <span className="pl-1.5 text-[10.5px] tracking-[0.06em]">
           {isPhone ? "tap to open" : "⌘K"}
         </span>
       </button>

@@ -46,15 +46,15 @@ function Footer() {
   return (
     <footer className="border-t border-line pb-12 md:pb-0">
       <div
-        className={`${wrap} flex flex-wrap justify-between gap-3 py-5 font-mono text-[11px] tracking-[0.08em] text-dim`}
+        className={`${wrap} flex flex-wrap justify-between gap-3 py-5 font-mono text-[11px] tracking-[0.08em] text-muted`}
       >
         <span>{profile.fullName.toUpperCase()} · {profile.location.toUpperCase()}</span>
         <span className="flex flex-wrap gap-[18px]">
           <span>
-            BUILD <span className="text-muted">{sha}</span>
+            BUILD <span className="text-text">{sha}</span>
           </span>
           <span>
-            DEPLOYED <span className="text-muted">{date}</span>
+            DEPLOYED <span className="text-text">{date}</span>
           </span>
           <span className="flex items-center gap-1.5">
             <span className="size-1.5 rounded-full bg-accent" aria-hidden />
