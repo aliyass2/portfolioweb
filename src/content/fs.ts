@@ -1,6 +1,7 @@
 // Virtual filesystem + shell for the terminal. Pure: no DOM access. The
 // Terminal component applies the returned effects (scroll, open, clear).
 import {
+  type DiagramKind,
   about,
   featuredWork,
   principles,
@@ -13,7 +14,13 @@ import {
 export type Tone = "text" | "muted" | "accent";
 export type Line = { text: string; tone: Tone };
 
-type FileNode = { kind: "file"; name: string; lines?: string[]; href?: string };
+type FileNode = {
+  kind: "file";
+  name: string;
+  lines?: string[];
+  href?: string;
+  play?: DiagramKind; // reading it runs that diagram in ~/approach
+};
 type DirNode = {
   kind: "dir";
   name: string;
@@ -50,6 +57,7 @@ export const root: DirNode = {
         kind: "file",
         name: `${p.slug}.md`,
         lines: [`# ${p.title.toLowerCase()}`, p.body],
+        play: p.diagram,
       })),
     },
     {
@@ -122,6 +130,7 @@ const listing = (dir: DirNode) =>
 export type Effect =
   | { type: "scroll"; anchor: string; highlight: boolean }
   | { type: "open"; href: string }
+  | { type: "play"; diagram: DiagramKind; anchor: string }
   | { type: "clear" };
 
 export type Result = { lines: Line[]; cwd: Cwd; effect?: Effect };
@@ -149,10 +158,16 @@ const help: [string, string][] = [
   ["pwd", "where you are"],
   ["cat <file>", "read a file · cat cv.pdf opens the cv"],
   ["stack", "what I build with"],
-  ["trace", "sample request trace"],
+  ["trace", "sample request trace, played in ~/approach"],
   ["whoami", "one line"],
   ["clear", "clear screen"],
 ];
+
+const playEffect = (diagram: DiagramKind): Effect => ({
+  type: "play",
+  diagram,
+  anchor: `approach-${principles.find((p) => p.diagram === diagram)!.slug}`,
+});
 
 export function run(input: string, cwd: Cwd): Result {
   const raw = input.trim();
@@ -227,7 +242,10 @@ export function run(input: string, cwd: Cwd): Result {
       else if (node.href) {
         out(`→ ${node.name}`, "accent");
         return { lines, cwd, effect: { type: "open", href: node.href } };
-      } else node.lines?.forEach((l, i) => out(l, i === 0 ? "text" : "muted"));
+      } else {
+        node.lines?.forEach((l, i) => out(l, i === 0 ? "text" : "muted"));
+        if (node.play) return { lines, cwd, effect: playEffect(node.play) };
+      }
       return { lines, cwd };
     }
     case "stack":
@@ -237,7 +255,7 @@ export function run(input: string, cwd: Cwd): Result {
       sampleTrace.forEach((l, i) =>
         out(l, i === 0 ? "text" : i === sampleTrace.length - 1 ? "accent" : "muted"),
       );
-      return { lines, cwd };
+      return { lines, cwd, effect: playEffect("trace") };
     case "whoami":
       out(profile.whoami, "text");
       return { lines, cwd };

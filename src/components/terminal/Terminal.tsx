@@ -30,7 +30,7 @@ type Placement = "hero" | "docked";
  * On phones it is always docked, as a bottom bar.
  */
 export function Terminal() {
-  const { active, view, setView, openSignal, openTerminal } = useConsole();
+  const { active, view, setView, openSignal, openTerminal, playDiagram } = useConsole();
   const reducedMotion = usePrefersReducedMotion();
   const isPhone = useMediaQuery("(max-width: 899px)");
 
@@ -78,8 +78,14 @@ export function Terminal() {
         window.open(effect.href, "_blank", "noopener");
         return;
       }
-      spyPausedUntil.current = Date.now() + 1200;
       const behavior: ScrollBehavior = reducedMotion ? "auto" : "smooth";
+      if (effect.type === "play") {
+        // cwd keeps following the scroll here; only `cd` pins it
+        document.getElementById(effect.anchor)?.scrollIntoView({ behavior, block: "center" });
+        playDiagram(effect.diagram);
+        return;
+      }
+      spyPausedUntil.current = Date.now() + 1200;
       if (effect.anchor === "top") {
         window.scrollTo({ top: 0, behavior });
         return;
@@ -92,7 +98,7 @@ export function Terminal() {
         setTimeout(() => delete el.dataset.highlight, 1500);
       }
     },
-    [reducedMotion],
+    [reducedMotion, playDiagram],
   );
 
   const submit = useCallback(

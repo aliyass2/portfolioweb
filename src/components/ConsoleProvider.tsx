@@ -8,7 +8,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { sections, type SectionId } from "@/content/site";
+import { sections, type DiagramKind, type SectionId } from "@/content/site";
 
 export type TerminalView = "expanded" | "collapsed" | "hidden";
 export type Active = "top" | SectionId;
@@ -19,6 +19,8 @@ type Ctx = {
   setView: (v: TerminalView) => void;
   openSignal: number; // bumps on ⌘K / nav chip; terminal focuses on change
   openTerminal: () => void;
+  diagramSignal: { kind: DiagramKind | null; n: number }; // bumps to replay a diagram
+  playDiagram: (kind: DiagramKind) => void;
 };
 
 const ConsoleContext = createContext<Ctx | null>(null);
@@ -44,6 +46,7 @@ export function ConsoleProvider({ children }: { children: React.ReactNode }) {
   const [active, setActive] = useState<Active>("top");
   const [view, setViewState] = useState<TerminalView>("collapsed");
   const [openSignal, setOpenSignal] = useState(0);
+  const [diagramSignal, setDiagramSignal] = useState<Ctx["diagramSignal"]>({ kind: null, n: 0 });
 
   // Restore preference; below 1280px the dock defaults to collapsed.
   useEffect(() => {
@@ -63,6 +66,11 @@ export function ConsoleProvider({ children }: { children: React.ReactNode }) {
     setView("expanded");
     setOpenSignal((n) => n + 1);
   }, [setView]);
+
+  const playDiagram = useCallback(
+    (kind: DiagramKind) => setDiagramSignal((s) => ({ kind, n: s.n + 1 })),
+    [],
+  );
 
   // Scroll-spy: the active section is the last one whose top has passed
   // a line just below the sticky nav.
@@ -108,8 +116,8 @@ export function ConsoleProvider({ children }: { children: React.ReactNode }) {
   }, [openTerminal]);
 
   const value = useMemo(
-    () => ({ active, view, setView, openSignal, openTerminal }),
-    [active, view, setView, openSignal, openTerminal],
+    () => ({ active, view, setView, openSignal, openTerminal, diagramSignal, playDiagram }),
+    [active, view, setView, openSignal, openTerminal, diagramSignal, playDiagram],
   );
   return <ConsoleContext.Provider value={value}>{children}</ConsoleContext.Provider>;
 }
