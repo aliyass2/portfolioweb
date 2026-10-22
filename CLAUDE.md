@@ -19,6 +19,13 @@ No test runner yet. If you add one, document the single-test command here.
 
 Where things live: the identity tokens are CSS variables on `:root` in `src/app/globals.css`, exposed to Tailwind via `@theme` (`bg-ground`, `text-muted`, `border-line`, `text-accent`, `font-mono`, …). The fonts are IBM Plex via `next/font` in `src/app/layout.tsx`. The content data files from the build plan go in `src/content/`. The CV is served from `public/cv.pdf`.
 
+How the page is wired:
+
+- `src/content/site.ts` holds all copy. `src/content/fs.ts` derives the terminal's filesystem from it and exports pure `run(input, cwd)` and `complete()` functions. They return lines plus an optional effect (scroll/open/clear) that the component applies. To add a terminal file or command, edit fs.ts. To add a project, add it to `work` in site.ts and the card, `ls work` and `cd work/<slug>` (anchor `#work-<slug>`) all follow.
+- `ConsoleProvider` (client) owns the cross-cutting state: scroll-spy `active` section (the nav's active link and the terminal's cwd), the persisted terminal view (`terminal:state`), and the ⌘K open signal.
+- `Terminal` is rendered once, inside a slot in the hero. An IntersectionObserver on the slot switches it between inline (hero) and `position: fixed` (docked). It never remounts, so history and cwd persist. Below 900px (`md`, overridden in globals.css) it is always docked as a bottom bar, and the hero shows `EventFlow` instead. Don't give any ancestor of the slot a `transform`/`filter`, which would break the fixed docking.
+- Footer BUILD/DEPLOYED come from `env` in `next.config.ts` (Vercel SHA, else `git rev-parse`), fixed at build time.
+
 Git: the remote is `aliyass2/portfolioweb` (personal account) over the `github-personal` SSH host alias. The commit identity is set repo-locally to the aliyass2 noreply email. Never use the work account (`ali-kareem_ISCQI`), which is the globally active `gh` account. For `gh` calls on this repo, prefix them with `GH_TOKEN=$(gh auth token --user aliyass2)`.
 
 ## Reading the artboards
