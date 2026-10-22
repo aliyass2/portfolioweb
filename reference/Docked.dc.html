@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scrolled — docked terminal</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0;background:#0A0D12;color:#E6EBF0;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#E6EBF0;text-decoration:none}a:hover{color:#F0A23B}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+</style>
+</helmet>
+<div style="width:1440px;height:900px;box-sizing:border-box;background:#0A0D12;position:relative;overflow:hidden;display:flex;flex-direction:column">
+
+  <!-- sticky nav, scrolled state: hairline + progress -->
+  <div style="border-bottom:1px solid #1F2833;background:#0A0D12;position:relative">
+    <div style="position:absolute;left:0;top:0;height:2px;width:38%;background:{{accent}}"></div>
+    <div style="max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px">
+      <span style="font-weight:600;font-size:15px;letter-spacing:0.02em">ALI YASS</span>
+      <div style="display:flex;align-items:center;gap:28px;font-size:14px;color:#8A96A3">
+        <span style="color:#E6EBF0">Work</span><span>Approach</span><span>About</span><span>Contact</span>
+        <span class="mono" style="font-size:10.5px;letter-spacing:0.06em;color:#4E5A66;border:1px solid #1F2833;padding:4px 8px;border-radius:3px">⌘K</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- page content behind: the work section, mid-scroll -->
+  <div style="max-width:1200px;margin:0 auto;padding:72px 32px 0;display:flex;flex-direction:column;gap:40px;width:100%;box-sizing:border-box">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="mono" style="font-size:12px;letter-spacing:0.12em;color:{{accent}}">~/work</div>
+      <h2 style="margin:0;font-size:40px;font-weight:500;letter-spacing:-0.02em">Systems with a country behind them.</h2>
+    </div>
+    <div style="border:1px solid #1F2833;border-radius:6px;background:#0E1218;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)">
+      <div style="padding:40px;display:flex;flex-direction:column;gap:20px;border-right:1px solid #1F2833">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="mono" style="font-size:11px;letter-spacing:0.12em;color:#8A96A3">QI CARD · 2026 — PRESENT</div>
+          <div class="mono" style="font-size:11px;letter-spacing:0.1em;color:{{accent}};border:1px solid {{accent}};padding:3px 8px;border-radius:3px">CURRENT</div>
+        </div>
+        <h3 style="margin:0;font-size:28px;font-weight:500;line-height:1.2">National oil-distribution systems for OPDC</h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#8A96A3">eGov backend systems for the Oil Products Distribution Company, Iraq's state-owned fuel distributor, built inside the country's largest payment infrastructure.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5">
+          <div style="display:flex;gap:12px"><span style="color:{{accent}}">—</span><span>A multi-tenant distribution system serving operations across all of Iraq</span></div>
+          <div style="display:flex;gap:12px"><span style="color:{{accent}}">—</span><span>A warehouse distribution system for tracking stock and movement</span></div>
+          <div style="display:flex;gap:12px"><span style="color:{{accent}}">—</span><span>The Coupon mini app, a citizen-facing service inside the SuperQi app</span></div>
+        </div>
+      </div>
+      <div style="padding:40px;display:flex;flex-direction:column;justify-content:center;gap:14px">
+        <div class="mono" style="font-size:11px;letter-spacing:0.12em;color:#8A96A3">TENANT TOPOLOGY</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:12px"><div class="mono" style="width:120px;height:34px;border:1px solid {{accent}};border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px">CORE</div><div style="flex:1;height:1px;background:#2A3542"></div><div style="display:flex;gap:8px"><div class="mono" style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3">T-01</div><div class="mono" style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3">T-02</div><div class="mono" style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3">T-03</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div class="mono" style="width:120px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#8A96A3">WAREHOUSE</div><div style="flex:1;height:1px;background:#2A3542"></div><div style="display:flex;gap:8px"><div class="mono" style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3">T-04</div><div class="mono" style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3">T-05</div><div class="mono" style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3">…</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;opacity:0.55">
+      <div style="border:1px solid #1F2833;border-radius:6px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="margin:0;font-size:21px;font-weight:600">Office Management Platform</h3><p style="margin:0;font-size:14.5px;line-height:1.6;color:#8A96A3">Document workflow system deployed across Iraqi passport offices nationwide.</p></div>
+      <div style="border:1px solid #1F2833;border-radius:6px;padding:32px;display:flex;flex-direction:column;gap:12px"><h3 style="margin:0;font-size:21px;font-weight:600">Biometric HR System</h3><p style="margin:0;font-size:14.5px;line-height:1.6;color:#8A96A3">Event-driven microservices with face-recognition attendance.</p></div>
+    </div>
+  </div>
+
+  <!-- DOCKED TERMINAL: fixed bottom-right in the real build -->
+  <div style="position:absolute;right:28px;bottom:28px;width:460px;border:1px solid #2A3542;background:#0E1218;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px #0A0D12">
+    <div class="mono" style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px 8px 14px;border-bottom:1px solid #1F2833;font-size:11px;letter-spacing:0.1em;color:#8A96A3">
+      <span style="display:flex;align-items:center;gap:8px"><span style="width:7px;height:7px;border-radius:50%;background:{{accent}};display:inline-block"></span>ali@portfolio</span>
+      <span style="display:flex;gap:4px">
+        <button aria-label="Collapse terminal" style="width:32px;height:28px;background:none;border:0;color:#8A96A3;font-family:inherit;font-size:13px;cursor:pointer;border-radius:3px">—</button>
+        <button aria-label="Hide terminal" style="width:32px;height:28px;background:none;border:0;color:#8A96A3;font-family:inherit;font-size:13px;cursor:pointer;border-radius:3px">✕</button>
+      </span>
+    </div>
+    <div class="mono" style="padding:12px 14px;font-size:12px;line-height:1.7;display:flex;flex-direction:column;color:#8A96A3">
+      <div style="color:#E6EBF0">➜ ~ cd work</div>
+      <div style="color:{{accent}}">→ #work</div>
+      <div style="color:#E6EBF0">➜ work ls</div>
+      <div style="color:#E6EBF0">opdc-distribution/   office-management/   biometric-hr/   evisa/   ticketing-observability/</div>
+      <div style="display:flex;align-items:center;gap:8px;padding-top:4px"><span style="color:{{accent}}">➜</span><span>work</span><span style="color:#E6EBF0">cd opdc-distribution</span><span style="width:8px;height:15px;background:{{accent}};display:inline-block"></span></div>
+    </div>
+  </div>
+
+  <!-- COLLAPSED STATE sample (what — produces): shown as a note-style spec to the left -->
+  <div style="position:absolute;left:28px;bottom:28px;display:flex;flex-direction:column;gap:10px">
+    <div class="mono" style="font-size:10px;letter-spacing:0.12em;color:#4E5A66">COLLAPSED STATE (AFTER —)</div>
+    <div class="mono" style="display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 14px;border:1px solid #2A3542;background:#0E1218;border-radius:20px;font-size:12px;color:#8A96A3"><span style="width:7px;height:7px;border-radius:50%;background:{{accent}};display:inline-block"></span><span style="color:{{accent}}">➜</span><span>work</span><span style="color:#4E5A66;letter-spacing:0.06em;font-size:10.5px;padding-left:6px">⌘K</span></div>
+    <div class="mono" style="font-size:10px;letter-spacing:0.12em;color:#4E5A66;padding-top:6px">HIDDEN STATE (AFTER ✕): NOTHING. ⌘K OR THE NAV HINT BRINGS IT BACK.</div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#F0A23B","section":"Identity"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return { accent: this.props.accent ?? '#F0A23B' }; }
+}
+</script>
+</body>
+</html>

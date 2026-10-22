@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ali Yass — Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0;background:#0A0D12;color:#E6EBF0;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#E6EBF0;text-decoration:none}a:hover{color:#F0A23B}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:center}
+@media (max-width:900px){.grid4,.grid3,.grid2,.hero{grid-template-columns:repeat(1,minmax(0,1fr))}.hide-m{display:none}}
+</style>
+</helmet>
+
+<div style="display:flex;flex-direction:column;background:#0A0D12;min-height:100vh">
+
+<!-- NAV -->
+<div style="border-bottom:1px solid #1F2833">
+<div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;height:64px">
+  <a href="#top" style="font-weight:600;font-size:15px;letter-spacing:0.02em">ALI YASS</a>
+  <div class="mono hide-m" style="display:flex;align-items:center;gap:10px;font-size:12px;color:#8A96A3;letter-spacing:0.06em">
+    <span style="width:8px;height:8px;border-radius:50%;background:{{accent}};display:inline-block"></span>
+    <span>BAGHDAD · UTC+3 · OPEN TO RELOCATE (EU)</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:28px;font-size:14px;color:#8A96A3">
+    <a href="#work" style="color:#8A96A3">Work</a><a href="#approach" style="color:#8A96A3">Approach</a><a href="#about" style="color:#8A96A3">About</a><a href="#contact" style="color:#8A96A3">Contact</a>
+    <span class="mono hide-m" style="font-size:10.5px;letter-spacing:0.06em;color:#4E5A66;border:1px solid #1F2833;padding:4px 8px;border-radius:3px">⌘K</span>
+  </div>
+</div>
+</div>
+
+<!-- HERO -->
+<div id="top" class="wrap" style="padding-top:112px;padding-bottom:112px">
+<div class="hero">
+  <div style="display:flex;flex-direction:column;gap:28px">
+    <div class="mono" style="font-size:12px;letter-spacing:0.12em;color:{{accent}}">BACKEND ENGINEER · .NET · DISTRIBUTED SYSTEMS</div>
+    <h1 style="margin:0;font-size:64px;line-height:1.02;font-weight:500;letter-spacing:-0.025em">I build the backend systems that Iraqi institutions run on.</h1>
+    <p style="margin:0;font-size:19px;line-height:1.55;color:#8A96A3;max-width:560px">Workflow engines, event-driven services and production observability for government and financial platforms — designed to be audited, traced and extended.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;padding-top:8px">
+      <a href="#work" style="display:inline-flex;align-items:center;height:48px;padding:0 22px;background:{{accent}};color:#0A0D12;font-weight:600;font-size:15px;border-radius:4px">See the work</a>
+      <a href="#contact" style="display:inline-flex;align-items:center;height:48px;padding:0 22px;border:1px solid #2A3542;font-size:15px;border-radius:4px">Get in touch</a>
+    </div>
+  </div>
+
+  <!-- Hero terminal: a real shell that navigates the page. Buttons + nav still work without it. -->
+  <div style="border:1px solid #1F2833;background:#0E1218;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;min-height:420px">
+    <div class="mono" style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #1F2833;font-size:11px;letter-spacing:0.1em;color:#8A96A3">
+      <span style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:#2A3542;display:inline-block"></span><span style="width:8px;height:8px;border-radius:50%;background:#2A3542;display:inline-block"></span><span style="width:8px;height:8px;border-radius:50%;background:{{accent}};display:inline-block"></span></span>
+      <span>ali@portfolio — zsh</span>
+      <span style="color:#4E5A66">type help</span>
+    </div>
+    <div class="mono" style="padding:16px;font-size:12.5px;line-height:1.75;display:flex;flex-direction:column;flex:1;min-height:0;gap:2px">
+      <sc-for list="{{lines}}" as="line" hint-placeholder-count="6">
+        <div style="white-space:pre-wrap;color:{{line.color}}">{{line.text}}</div>
+      </sc-for>
+      <div style="display:flex;align-items:center;gap:8px;padding-top:6px">
+        <label for="term-in" style="color:{{accent}}">➜</label>
+        <span style="color:#8A96A3">{{cwd}}</span>
+        <input id="term-in" aria-label="Portfolio command line" value="{{cmd}}" onChange="{{onChange}}" onKeyDown="{{onKey}}" placeholder="help" autocomplete="off" spellcheck="false" style="flex:1;min-width:0;background:transparent;border:0;outline:0;color:#E6EBF0;font-family:inherit;font-size:inherit;caret-color:{{accent}};height:32px">
+      </div>
+    </div>
+    <div class="mono" style="display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;border-top:1px solid #1F2833;font-size:10.5px;letter-spacing:0.06em;color:#4E5A66">
+      <button onClick="{{runWork}}" style="background:none;border:1px solid #1F2833;color:#8A96A3;font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:6px 9px;border-radius:3px;cursor:pointer;min-height:28px">work</button>
+      <button onClick="{{runApproach}}" style="background:none;border:1px solid #1F2833;color:#8A96A3;font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:6px 9px;border-radius:3px;cursor:pointer;min-height:28px">approach</button>
+      <button onClick="{{runStack}}" style="background:none;border:1px solid #1F2833;color:#8A96A3;font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:6px 9px;border-radius:3px;cursor:pointer;min-height:28px">stack</button>
+      <button onClick="{{runContact}}" style="background:none;border:1px solid #1F2833;color:#8A96A3;font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:6px 9px;border-radius:3px;cursor:pointer;min-height:28px">contact</button>
+      <button onClick="{{runTrace}}" style="background:none;border:1px solid #1F2833;color:#8A96A3;font-family:inherit;font-size:inherit;letter-spacing:inherit;padding:6px 9px;border-radius:3px;cursor:pointer;min-height:28px">trace</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CAPABILITY STRIP -->
+<div style="border-top:1px solid #1F2833;border-bottom:1px solid #1F2833;background:#1F2833">
+<div class="grid4" style="max-width:1200px;margin:0 auto">
+  <div style="background:#0A0D12;padding:36px 32px;display:flex;flex-direction:column;gap:12px">
+    <div class="mono" style="font-size:11px;letter-spacing:0.12em;color:{{accent}}">01</div>
+    <div style="font-size:18px;font-weight:600">Workflow engines</div>
+    <div style="font-size:14px;line-height:1.55;color:#8A96A3">FSM-driven processes with explicit states, multi-level approvals, escalation and a full audit trail.</div>
+  </div>
+  <div style="background:#0A0D12;padding:36px 32px;display:flex;flex-direction:column;gap:12px">
+    <div class="mono" style="font-size:11px;letter-spacing:0.12em;color:{{accent}}">02</div>
+    <div style="font-size:18px;font-weight:600">Event-driven integration</div>
+    <div style="font-size:14px;line-height:1.55;color:#8A96A3">RabbitMQ and MassTransit with outbox/inbox and idempotency, so services agree even when things fail.</div>
+  </div>
+  <div style="background:#0A0D12;padding:36px 32px;display:flex;flex-direction:column;gap:12px">
+    <div class="mono" style="font-size:11px;letter-spacing:0.12em;color:{{accent}}">03</div>
+    <div style="font-size:18px;font-weight:600">Production observability</div>
+    <div style="font-size:14px;line-height:1.55;color:#8A96A3">OpenTelemetry traces and metrics, Grafana, Loki, Tempo — stood up end to end and used to debug live incidents.</div>
+  </div>
+  <div style="background:#0A0D12;padding:36px 32px;display:flex;flex-direction:column;gap:12px">
+    <div class="mono" style="font-size:11px;letter-spacing:0.12em;color:{{accent}}">04</div>
+    <div style="font-size:18px;font-weight:600">Architecture that lasts</div>
+    <div style="font-size:14px;line-height:1.55;color:#8A96A3">DDD, clean architecture and schema-per-module monoliths designed for service extraction without a rewrite.</div>
+  </div>
+</div>
+</div>
+
+<!-- WORK -->
+<div id="work" class="wrap" style="padding-top:112px;padding-bottom:112px;display:flex;flex-direction:column;gap:48px">
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="mono" style="font-size:12px;letter-spacing:0.12em;color:{{accent}}">~/work</div>
+      <h2 style="margin:0;font-size:40px;font-weight:500;letter-spacing:-0.02em">Systems with a country behind them.</h2>
+    </div>
+    <div style="font-size:14px;color:#8A96A3;max-width:380px;line-height:1.55">Government and financial platforms where correctness, traceability and uptime are the product.</div>
+  </div>
+
+  <!-- Featured: Qi Card -->
+  <div style="border:1px solid #1F2833;border-radius:6px;background:#0E1218;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0">
+    <div style="padding:40px;display:flex;flex-direction:column;gap:20px;border-right:1px solid #1F2833">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div class="mono" style="font-size:11px;letter-spacing:0.12em;color:#8A96A3">QI CARD · 2026 — PRESENT</div>
+        <div class="mono" style="font-size:11px;letter-spacing:0.1em;color:{{accent}};border:1px solid {{accent}};padding:3px 8px;border-radius:3px">CURRENT</div>
+      </div>
+      <h3 style="margin:0;font-size:28px;font-weight:500;letter-spacing:-0.01em;line-height:1.2">National oil-distribution systems for OPDC</h3>
+      <p style="margin:0;font-size:15px;line-height:1.6;color:#8A96A3">eGov backend systems for the Oil Products Distribution Company, Iraq's state-owned fuel distributor, built inside the country's largest payment infrastructure.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5">
+        <div style="display:flex;gap:12px"><span style="color:{{accent}}">—</span><span>A multi-tenant distribution system serving operations across all of Iraq</span></div>
+        <div style="display:flex;gap:12px"><span style="color:{{accent}}">—</span><span>A warehouse distribution system for tracking stock and movement</span></div>
+        <div style="display:flex;gap:12px"><span style="color:{{accent}}">—</span><span>The Coupon mini app, a citizen-facing service inside the SuperQi app</span></div>
+      </div>
+      <div class="mono" style="font-size:11.5px;letter-spacing:0.04em;color:#8A96A3;padding-top:8px;border-top:1px solid #1F2833">.NET · ASP.NET Core · PostgreSQL · RabbitMQ · Multi-tenancy</div>
+    </div>
+    <div style="padding:40px;display:flex;flex-direction:column;justify-content:center;gap:14px">
+      <div class="mono" style="font-size:11px;letter-spacing:0.12em;color:#8A96A3">TENANT TOPOLOGY</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px"><div style="width:120px;height:34px;border:1px solid {{accent}};border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px" class="mono">CORE</div><div style="flex:1;height:1px;background:#2A3542"></div><div style="display:flex;gap:8px"><div style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3" class="mono">T-01</div><div style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3" class="mono">T-02</div><div style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3" class="mono">T-03</div></div></div>
+        <div style="display:flex;align-items:center;gap:12px"><div style="width:120px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#8A96A3" class="mono">WAREHOUSE</div><div style="flex:1;height:1px;background:#2A3542"></div><div style="display:flex;gap:8px"><div style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3" class="mono">T-04</div><div style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3" class="mono">T-05</div><div style="width:68px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3" class="mono">…</div></div></div>
+        <div style="display:flex;align-items:center;gap:12px"><div style="width:120px;height:34px;border:1px solid #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#8A96A3" class="mono">COUPON</div><div style="flex:1;height:1px;background:#2A3542"></div><div style="width:220px;height:34px;border:1px dashed #2A3542;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#8A96A3" class="mono">SUPERQI MINI APP</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ScopeSky grid -->
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div class="mono" style="font-size:11px;letter-spacing:0.12em;color:#8A96A3">SCOPESKY COMMUNICATIONS · 2024 — 2026</div>
+    <div class="grid2">
+      <div style="border:1px solid #1F2833;border-radius:6px;padding:32px;display:flex;flex-direction:column;gap:14px">
+        <h3 style="margin:0;font-size:21px;font-weight:600">Office Management Platform</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8A96A3">Document workflow system deployed across Iraqi passport offices nationwide. RBAC, FSM-driven document processing and multi-level approval chains.</p>
+        <div class="mono" style="font-size:11.5px;color:#8A96A3;padding-top:10px;border-top:1px solid #1F2833">ASP.NET Core · FSM · RBAC · PostgreSQL</div>
+      </div>
+      <div style="border:1px solid #1F2833;border-radius:6px;padding:32px;display:flex;flex-direction:column;gap:14px">
+        <h3 style="margin:0;font-size:21px;font-weight:600">Biometric HR System</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8A96A3">Event-driven microservices with face-recognition attendance. Outbox/inbox over RabbitMQ and MassTransit, pgvector embedding search, SignalR notifications, Hangfire jobs, MinIO storage.</p>
+        <div class="mono" style="font-size:11.5px;color:#8A96A3;padding-top:10px;border-top:1px solid #1F2833">Microservices · RabbitMQ · pgvector · SignalR · MinIO</div>
+      </div>
+      <div style="border:1px solid #1F2833;border-radius:6px;padding:32px;display:flex;flex-direction:column;gap:14px">
+        <h3 style="margin:0;font-size:21px;font-weight:600">eVisa Platform</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8A96A3">Automated visa application workflow with Audit.NET event tracking, multilingual data modeling and government-facing notification pipelines.</p>
+        <div class="mono" style="font-size:11.5px;color:#8A96A3;padding-top:10px;border-top:1px solid #1F2833">.NET · Audit.NET · Multilingual data · Notifications</div>
+      </div>
+      <div style="border:1px solid #1F2833;border-radius:6px;padding:32px;display:flex;flex-direction:column;gap:14px">
+        <h3 style="margin:0;font-size:21px;font-weight:600">Ticketing &amp; Observability</h3>
+        <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8A96A3">An FSM ticketing engine with dozens of transitions and escalation logic, plus the full OpenTelemetry / Grafana / Loki / Tempo stack used to trace a live rate-limiting incident to its root cause.</p>
+        <div class="mono" style="font-size:11.5px;color:#8A96A3;padding-top:10px;border-top:1px solid #1F2833">OpenTelemetry · Prometheus · Grafana · Loki · Tempo · Seq</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPROACH -->
+<div id="approach" style="border-top:1px solid #1F2833;background:#0E1218">
+<div class="wrap" style="padding-top:112px;padding-bottom:112px;display:flex;flex-direction:column;gap:48px">
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:640px">
+    <div class="mono" style="font-size:12px;letter-spacing:0.12em;color:{{accent}}">~/approach</div>
+    <h2 style="margin:0;font-size:40px;font-weight:500;letter-spacing:-0.02em">Three patterns I reach for, and why.</h2>
+  </div>
+  <div class="grid3">
+    <!-- FSM -->
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="border:1px solid #1F2833;border-radius:6px;background:#0A0D12;padding:24px;display:flex;align-items:center;gap:6px;height:112px;box-sizing:border-box">
+        <div class="mono" style="font-size:10px;padding:8px 10px;border:1px solid #2A3542;border-radius:4px;color:#8A96A3">DRAFT</div><div style="flex:1;height:1px;background:#2A3542"></div>
+        <div class="mono" style="font-size:10px;padding:8px 10px;border:1px solid #2A3542;border-radius:4px;color:#8A96A3">SUBMITTED</div><div style="flex:1;height:1px;background:#2A3542"></div>
+        <div class="mono" style="font-size:10px;padding:8px 10px;border:1px solid {{accent}};border-radius:4px;color:{{accent}}">REVIEW</div><div style="flex:1;height:1px;background:#2A3542"></div>
+        <div class="mono" style="font-size:10px;padding:8px 10px;border:1px solid #2A3542;border-radius:4px;color:#8A96A3">APPROVED</div>
+      </div>
+      <h3 style="margin:0;font-size:20px;font-weight:600">Make state explicit</h3>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8A96A3">Government processes are state machines whether you model them or not. I model them: every transition named, guarded and recorded, so the audit trail is a by-product, not a feature.</p>
+    </div>
+    <!-- Outbox -->
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="border:1px solid #1F2833;border-radius:6px;background:#0A0D12;padding:24px;display:flex;flex-direction:column;justify-content:center;gap:10px;height:112px;box-sizing:border-box">
+        <div style="display:flex;align-items:center;gap:8px"><div class="mono" style="font-size:10px;color:#8A96A3;width:52px">DB TX</div><div style="flex:1;height:6px;background:#1F2833;border-radius:3px;overflow:hidden"><div style="width:62%;height:100%;background:{{accent}}"></div></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div class="mono" style="font-size:10px;color:#8A96A3;width:52px">OUTBOX</div><div style="flex:1;height:6px;background:#1F2833;border-radius:3px;overflow:hidden"><div style="width:62%;height:100%;background:{{accent}}"></div></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div class="mono" style="font-size:10px;color:#8A96A3;width:52px">PUBLISH</div><div style="flex:1;height:6px;background:#1F2833;border-radius:3px;overflow:hidden"><div style="width:38%;margin-left:62%;height:100%;background:#4E5A66"></div></div></div>
+      </div>
+      <h3 style="margin:0;font-size:20px;font-weight:600">Write once, deliver reliably</h3>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8A96A3">Events are committed in the same transaction as the data, then relayed. Consumers de-duplicate. The result is at-least-once delivery that behaves like exactly-once, with no lost messages during a crash.</p>
+    </div>
+    <!-- Trace -->
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="border:1px solid #1F2833;border-radius:6px;background:#0A0D12;padding:24px;display:flex;flex-direction:column;justify-content:center;gap:8px;height:112px;box-sizing:border-box">
+        <div style="display:flex;align-items:center;gap:8px"><div class="mono" style="font-size:10px;color:#8A96A3;width:52px">api</div><div style="width:90%;height:6px;background:#2A3542;border-radius:3px"></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div class="mono" style="font-size:10px;color:#8A96A3;width:52px">auth</div><div style="width:18%;margin-left:4%;height:6px;background:#2A3542;border-radius:3px"></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div class="mono" style="font-size:10px;color:#8A96A3;width:52px">db</div><div style="width:46%;margin-left:26%;height:6px;background:{{accent}};border-radius:3px"></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div class="mono" style="font-size:10px;color:#8A96A3;width:52px">publish</div><div style="width:10%;margin-left:76%;height:6px;background:#2A3542;border-radius:3px"></div></div>
+      </div>
+      <h3 style="margin:0;font-size:20px;font-weight:600">If it isn't traced, it isn't done</h3>
+      <p style="margin:0;font-size:14.5px;line-height:1.6;color:#8A96A3">Every service ships with traces, metrics and structured logs from day one. That stack is how a 429 storm became a one-line fix instead of a week of guessing.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="wrap" style="padding-top:112px;padding-bottom:112px">
+<div class="grid2" style="align-items:start">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div class="mono" style="font-size:12px;letter-spacing:0.12em;color:{{accent}}">~/about</div>
+    <h2 style="margin:0;font-size:40px;font-weight:500;letter-spacing:-0.02em;max-width:460px">An engineer first, a programmer second.</h2>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:24px;font-size:16.5px;line-height:1.65;color:#8A96A3">
+    <p style="margin:0">I studied aeronautical engineering at the University of Baghdad, a discipline where a system that mostly works is a system that fails. I carried that standard into backend software: model the states, prove the invariants, instrument everything, assume the network will drop.</p>
+    <p style="margin:0">Today I design and ship .NET platforms for Iraqi government and financial institutions, and I'm preparing to bring that experience to a team in Europe.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;padding-top:8px">
+      <span class="mono" style="font-size:11.5px;padding:6px 10px;border:1px solid #2A3542;border-radius:3px;color:#E6EBF0">C# / .NET 10</span>
+      <span class="mono" style="font-size:11.5px;padding:6px 10px;border:1px solid #2A3542;border-radius:3px;color:#E6EBF0">ASP.NET Core</span>
+      <span class="mono" style="font-size:11.5px;padding:6px 10px;border:1px solid #2A3542;border-radius:3px;color:#E6EBF0">EF Core</span>
+      <span class="mono" style="font-size:11.5px;padding:6px 10px;border:1px solid #2A3542;border-radius:3px;color:#E6EBF0">PostgreSQL</span>
+      <span class="mono" style="font-size:11.5px;padding:6px 10px;border:1px solid #2A3542;border-radius:3px;color:#E6EBF0">RabbitMQ</span>
+      <span class="mono" style="font-size:11.5px;padding:6px 10px;border:1px solid #2A3542;border-radius:3px;color:#E6EBF0">MassTransit</span>
+      <span class="mono" style="font-size:11.5px;padding:6px 10px;border:1px solid #2A3542;border-radius:3px;color:#E6EBF0">OpenTelemetry</span>
+      <span class="mono" style="font-size:11.5px;padding:6px 10px;border:1px solid #2A3542;border-radius:3px;color:#E6EBF0">Grafana · Loki · Tempo</span>
+      <span class="mono" style="font-size:11.5px;padding:6px 10px;border:1px solid #2A3542;border-radius:3px;color:#E6EBF0">Docker</span>
+      <span class="mono" style="font-size:11.5px;padding:6px 10px;border:1px solid #2A3542;border-radius:3px;color:#E6EBF0">DDD</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" style="border-top:1px solid #1F2833;background:#0E1218">
+<div class="wrap" style="padding-top:96px;padding-bottom:96px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div class="mono" style="font-size:12px;letter-spacing:0.12em;color:{{accent}}">~/contact</div>
+    <h2 style="margin:0;font-size:48px;font-weight:500;letter-spacing:-0.025em;line-height:1.05">Let's build something that has to work.</h2>
+    <div style="font-size:15px;color:#8A96A3">Open to backend and platform roles in Europe. Remote-friendly, relocation-ready.</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:10px;font-size:16px" class="mono">
+    <a href="mailto:yass39656@gmail.com" style="display:flex;align-items:center;gap:12px;min-height:44px"><span style="color:{{accent}}">→</span>yass39656@gmail.com</a>
+    <a href="https://github.com/aliyass2" style="display:flex;align-items:center;gap:12px;min-height:44px"><span style="color:{{accent}}">→</span>github.com/aliyass2</a>
+    <a href="#top" style="display:flex;align-items:center;gap:12px;min-height:44px;color:#8A96A3"><span style="color:{{accent}}">→</span>Download CV (PDF)</a>
+  </div>
+</div>
+<div style="border-top:1px solid #1F2833">
+<div class="wrap mono" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:20px;padding-bottom:20px;font-size:11px;letter-spacing:0.08em;color:#4E5A66">
+  <span>ALI YASS KHUDHAIR · BAGHDAD, IRAQ</span>
+  <span style="display:flex;gap:18px;flex-wrap:wrap"><span>BUILD <span style="color:#8A96A3">[GIT SHA]</span></span><span>DEPLOYED <span style="color:#8A96A3">[DATE]</span></span><span style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:{{accent}};display:inline-block"></span>ALL SYSTEMS NOMINAL</span></span>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#F0A23B","options":["#F0A23B","#5EC2D8","#8FD17A","#E6EBF0"],"section":"Identity"},"$preview":{"width":1440,"height":4400}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cmd: '',
+      lines: [
+        { text: 'portfolio v3.0 · .NET backend · Baghdad', color: '#8A96A3' },
+        { text: 'try: ls · cd work · cd about · help', color: '#8A96A3' },
+        { text: '', color: '#8A96A3' }
+      ]
+    };
+  }
+  go(id) {
+    try { window.location.hash = id; } catch (e) {}
+  }
+  run(raw) {
+    var accent = this.props.accent || '#F0A23B';
+    var cmd = (raw || '').trim().toLowerCase();
+    var out = [{ text: '➜ ' + (this.state.cwd || '~') + ' ' + raw, color: '#E6EBF0' }];
+    var push = function (t, c) { out.push({ text: t, color: c || '#8A96A3' }); };
+    var jump = null;
+    var cwd = this.state.cwd || '~';
+    var fs = {
+      '~':        ['work/', 'approach/', 'about/', 'contact/', 'cv.pdf', 'README.md'],
+      'work':     ['opdc-distribution/', 'office-management/', 'biometric-hr/', 'evisa/', 'ticketing-observability/'],
+      'approach': ['explicit-state.md', 'outbox-relay.md', 'trace-everything.md'],
+      'about':    ['aeronautical-engineering.md', 'stack.txt'],
+      'contact':  ['email.txt', 'github.txt', 'cv.pdf']
+    };
+    var parts = cmd.split(/\s+/);
+    var verb = parts[0], arg = parts[1] || '';
+    if (verb === 'cd') {
+      var target = arg.replace(/^~\/?/, '').replace(/\/$/, '');
+      if (arg === '' || arg === '~' || arg === '..' || arg === '/') {
+        cwd = '~'; jump = 'top';
+      } else if (fs[target]) {
+        cwd = target; jump = target; push('→ #' + target, accent);
+      } else {
+        push('cd: no such directory: ' + arg);
+      }
+      var l1 = this.state.lines.concat(out);
+      if (l1.length > 14) l1 = l1.slice(l1.length - 14);
+      this.setState({ lines: l1, cmd: '', cwd: cwd });
+      if (jump) this.go(jump);
+      return;
+    }
+    if (verb === 'ls' || verb === 'dir') {
+      var where = arg ? arg.replace(/^~\/?/, '').replace(/\/$/, '') : cwd;
+      if (where === '' || where === '~') where = '~';
+      if (fs[where]) push(fs[where].join('   '), '#E6EBF0'); else push('ls: cannot access ' + arg);
+      var l2 = this.state.lines.concat(out);
+      if (l2.length > 14) l2 = l2.slice(l2.length - 14);
+      this.setState({ lines: l2, cmd: '' });
+      return;
+    }
+    switch (cmd) {
+      case 'help':
+      case '?':
+        push('commands:', '#E6EBF0');
+        push('  cd <dir>   navigate: work, approach, about, contact');
+        push('  ls         list what is here · cd .. goes home');
+        push('  pwd        where you are');
+        push('  stack      what I build with');
+        push('  trace      sample request trace');
+        push('  whoami     one line');
+        push('  cat cv.pdf open the cv');
+        push('  clear      clear screen');
+        break;
+      case 'pwd': push('/home/ali/' + (cwd === '~' ? '' : cwd), '#E6EBF0'); break;
+      case 'cat cv.pdf': case 'open cv.pdf': case 'cv': push('→ cv.pdf', accent); break;
+      case 'cat readme.md': case 'cat README.md':
+        push('# ali yass — backend engineer', '#E6EBF0');
+        push('builds workflow engines, event-driven services and observability');
+        push('for government and financial platforms. .NET, PostgreSQL, RabbitMQ.');
+        break;
+      case 'work': jump = 'work'; push('→ #work', accent); break;
+      case 'approach': jump = 'approach'; push('→ #approach', accent); break;
+      case 'about': jump = 'about'; push('→ #about', accent); break;
+      case 'contact': case 'mail': jump = 'contact'; push('→ #contact', accent); break;
+      case 'whoami':
+        push('ali yass khudhair — backend engineer, .NET, distributed systems', '#E6EBF0');
+        break;
+      case 'stack':
+        push('lang     C# · .NET 10', '#E6EBF0');
+        push('web      ASP.NET Core · EF Core · SignalR · Hangfire');
+        push('msg      RabbitMQ · MassTransit · outbox/inbox · idempotency');
+        push('data     PostgreSQL · pgvector · MongoDB · MinIO');
+        push('observe  OpenTelemetry · Prometheus · Grafana · Loki · Tempo · Seq');
+        push('arch     DDD · clean · modular monolith · FSM workflows');
+        break;
+      case 'trace':
+        push('POST /applications                 202  54ms', '#E6EBF0');
+        push('├─ auth.validate                          3ms');
+        push('├─ db.tx  insert + outbox.append        21ms');
+        push('├─ publish rabbitmq applications          4ms');
+        push('└─ inbox.dedupe → Submitted → Reviewed   9ms', accent);
+        break;
+      case 'clear': case 'cls':
+        this.setState({ lines: [], cmd: '' });
+        return;
+      case '':
+        this.setState({ lines: this.state.lines.concat([{ text: '➜ ~', color: '#E6EBF0' }]), cmd: '' });
+        return;
+      case 'sudo': case 'rm -rf /':
+        push('nice try. permission denied.', accent);
+        break;
+      default:
+        push('command not found: ' + cmd + ' — try help');
+    }
+    var lines = this.state.lines.concat(out);
+    if (lines.length > 14) lines = lines.slice(lines.length - 14);
+    this.setState({ lines: lines, cmd: '' });
+    if (jump) this.go(jump);
+  }
+  renderVals() {
+    var self = this;
+    return {
+      accent: this.props.accent ?? '#F0A23B',
+      cmd: this.state.cmd,
+      cwd: this.state.cwd || '~',
+      lines: this.state.lines,
+      onChange: function (e) { self.setState({ cmd: e.target.value }); },
+      onKey: function (e) { if (e.key === 'Enter') { self.run(self.state.cmd); } },
+      runWork: function () { self.run('work'); },
+      runApproach: function () { self.run('approach'); },
+      runStack: function () { self.run('stack'); },
+      runContact: function () { self.run('contact'); },
+      runTrace: function () { self.run('trace'); }
+    };
+  }
+}
+</script>
+</body>
+</html>
