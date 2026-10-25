@@ -64,3 +64,145 @@
     }
   }
 }
+
+/* ── Living system ─────────────────────────────────────────────────────
+   Content under the bus waits for the bus head to land on its section.
+   Only hidden when JS runs (html.js) and motion is allowed, so no-JS,
+   crawlers and reduced-motion users always get the full page. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-port] [data-reveal] {
+    opacity: 0;
+    transform: translateX(-18px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: calc(var(--i, 0) * 80ms);
+  }
+  .js [data-port][data-landed] [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.bus-port {
+  transition:
+    border-color 0.3s,
+    background-color 0.3s,
+    box-shadow 0.4s;
+}
+.bus-port[data-landed] {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 10px 1px rgb(240 162 59 / 0.55);
+}
+
+/* Iraq map: spokes draw out from the hub, cities light, then packets loop. */
+.iraq-map .map-packet {
+  stroke-dasharray: 5 100;
+  stroke-dashoffset: 5;
+  opacity: 0;
+  filter: drop-shadow(0 0 3px rgb(240 162 59 / 0.9));
+}
+.iraq-map .map-city {
+  transition: fill 0.3s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .iraq-map .map-spoke {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+  }
+  .js .iraq-map .map-city {
+    fill: var(--line-2);
+  }
+  /* a city lights once its spoke has drawn in */
+  .js [data-landed] .iraq-map .map-city {
+    fill: var(--accent);
+    transition-delay: calc(var(--d) + 0.45s);
+  }
+  .js [data-landed] .iraq-map .map-spoke {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.6s ease-out var(--d);
+  }
+  [data-landed] .iraq-map .map-packet {
+    animation: map-packet var(--p) linear var(--pd) infinite;
+  }
+  [data-landed] .iraq-map .map-hub-glow {
+    animation: map-hub 2.4s ease-in-out infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .iraq-map .map-city {
+    fill: var(--accent);
+  }
+}
+html:not(.js) .iraq-map .map-city {
+  fill: var(--accent);
+}
+@keyframes map-packet {
+  0% {
+    stroke-dashoffset: 5;
+    opacity: 1;
+  }
+  45% {
+    stroke-dashoffset: -100;
+    opacity: 1;
+  }
+  46%,
+  100% {
+    stroke-dashoffset: -100;
+    opacity: 0;
+  }
+}
+@keyframes map-hub {
+  50% {
+    transform: scale(1.6);
+    opacity: 0.4;
+  }
+}
+
+/* Cursor spotlight: an amber edge + faint inner light that follows the
+   pointer (--mx/--my set by PointerFx). */
+[data-spotlight] {
+  position: relative;
+  isolation: isolate;
+}
+[data-spotlight]::before,
+[data-spotlight]::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+[data-spotlight]::before {
+  inset: -1px;
+  padding: 1px;
+  background: radial-gradient(
+    260px circle at var(--mx, -999px) var(--my, -999px),
+    rgb(240 162 59 / 0.7),
+    transparent 65%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+[data-spotlight]::after {
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    420px circle at var(--mx, -999px) var(--my, -999px),
+    rgb(240 162 59 / 0.07),
+    transparent 60%
+  );
+}
+@media (hover: hover) {
+  [data-spotlight]:hover::before,
+  [data-spotlight]:hover::after {
+    opacity: 1;
+  }
+}

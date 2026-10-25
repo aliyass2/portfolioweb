@@ -64,7 +64,7 @@ export function EventFlow() {
         {log.map(([t, msg, suffix, at]) => (
           <div
             key={t}
-            className={`transition-opacity duration-300 ${step >= at ? "opacity-100" : "opacity-0"}`}
+            className={step >= at ? "visible" : "invisible"}
           >
             <span>{t}</span> <span className="text-text">{msg}</span>
             {suffix && <span className="text-accent">{suffix}</span>}

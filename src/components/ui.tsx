@@ -11,7 +11,9 @@ export function Eyebrow({ children }: { children: React.ReactNode }) {
 
 export function H2({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <h2 className={`text-[28px] leading-tight font-medium tracking-[-0.02em] md:text-[40px] ${className}`}>
+    <h2
+      className={`text-[30px] leading-[1.05] font-medium tracking-[-0.025em] md:text-[56px] md:leading-[1.02] md:tracking-[-0.03em] ${className}`}
+    >
       {children}
     </h2>
   );

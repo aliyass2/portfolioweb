@@ -10,15 +10,21 @@ const links = [
 export function Contact() {
   return (
     <section id="contact" className="scroll-mt-16 border-t border-line bg-surface">
-      <div className={`${wrap} flex flex-wrap items-end justify-between gap-8 py-14 md:py-24`}>
-        <div className="flex flex-col gap-4">
-          <Eyebrow>~/contact</Eyebrow>
-          <h2 className="text-[32px] leading-[1.05] font-medium tracking-[-0.025em] md:text-5xl">
+      <div data-port className={`${wrap} flex flex-wrap items-end justify-between gap-8 py-14 md:py-28`}>
+        <div className="flex flex-col gap-4" data-reveal>
+          <div data-port-anchor>
+            <Eyebrow>~/contact</Eyebrow>
+          </div>
+          <h2 className="max-w-[760px] text-[32px] leading-[1.02] font-medium tracking-[-0.03em] md:text-[clamp(48px,5.4vw,76px)]">
             {contact.heading}
           </h2>
           <p className="text-[15px] text-muted">{contact.sub}</p>
         </div>
-        <ul className="flex flex-col gap-2.5 font-mono text-[15px] md:text-base">
+        <ul
+          data-reveal
+          style={{ "--i": 2 } as React.CSSProperties}
+          className="flex flex-col gap-2.5 font-mono text-[15px] md:text-base"
+        >
           {links.map((l) => (
             <li key={l.href}>
               <a

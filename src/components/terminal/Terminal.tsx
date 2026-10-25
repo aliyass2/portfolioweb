@@ -10,6 +10,7 @@ import {
   type Effect,
   type Line,
 } from "@/content/fs";
+import { CONSOLE_EVENT } from "@/components/living/EventField";
 import { usePrefersReducedMotion, useMediaQuery } from "./hooks";
 
 const MAX_LINES = 14;
@@ -113,7 +114,14 @@ export function Terminal() {
       setCwd(result.cwd);
       setInput("");
       setHistIdx(null);
-      if (raw.trim()) setHistory((h) => [...h, raw.trim()].slice(-50));
+      if (raw.trim()) {
+        setHistory((h) => [...h, raw.trim()].slice(-50));
+        // the hero network answers: a burst of events from the terminal
+        const r = inputRef.current?.getBoundingClientRect();
+        window.dispatchEvent(
+          new CustomEvent(CONSOLE_EVENT, { detail: r && { x: r.left, y: r.top + r.height / 2 } }),
+        );
+      }
       if (result.effect) applyEffect(result.effect);
     },
     [cwd, applyEffect],
@@ -248,7 +256,7 @@ export function Terminal() {
   let body: React.ReactNode = null;
   if (placement === "hero") {
     body = (
-      <div className="flex min-h-[420px] flex-col overflow-hidden rounded-panel border border-line bg-surface font-mono">
+      <div className="hidden min-h-[420px] flex-col overflow-hidden rounded-panel md:flex border border-line-2 bg-surface/90 font-mono shadow-[0_0_0_1px_rgba(240,162,59,0.06),0_24px_90px_-30px_rgba(240,162,59,0.35)] backdrop-blur-md">
         <div className="flex items-center justify-between border-b border-line px-3.5 py-2.5 text-[11px] tracking-[0.1em] text-muted">
           <span className="flex items-center gap-2" aria-hidden>
             <span className="size-2 rounded-full bg-line-2" />

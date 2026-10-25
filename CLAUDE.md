@@ -23,8 +23,13 @@ How the page is wired:
 
 - `src/content/site.ts` holds all copy. `src/content/fs.ts` derives the terminal's filesystem from it and exports pure `run(input, cwd)` and `complete()` functions. They return lines plus an optional effect (scroll/open/clear) that the component applies. To add a terminal file or command, edit fs.ts. To add a project, add it to `work` in site.ts and the card, `ls work` and `cd work/<slug>` (anchor `#work-<slug>`) all follow.
 - `ConsoleProvider` (client) owns the cross-cutting state: scroll-spy `active` section (the nav's active link and the terminal's cwd), the persisted terminal view (`terminal:state`), and the ⌘K open signal.
-- `Terminal` is rendered once, inside a slot in the hero. An IntersectionObserver on the slot switches it between inline (hero) and `position: fixed` (docked). It never remounts, so history and cwd persist. Below 900px (`md`, overridden in globals.css) it is always docked as a bottom bar, and the hero shows `EventFlow` instead. Don't give any ancestor of the slot a `transform`/`filter`, which would break the fixed docking.
+- `Terminal` is rendered once, inside a slot in the hero. An IntersectionObserver on the slot switches it between inline (hero) and `position: fixed` (docked). It never remounts, so history and cwd persist. Below 900px (`md`, overridden in globals.css) it is always docked as a bottom bar, and the hero shows `EventFlow` instead. Don't give any ancestor of the slot a `transform`, `filter` or `backdrop-filter` (they break the fixed docking), nor `isolation`/`z-index` (they trap the docked terminal under later sections).
 - The Approach diagrams (`src/components/diagrams/`) and the phone `EventFlow` panel are scripted runs driven by `useScenario(durations)`. The last step is the resting state. It is what SSR, no-JS and reduced-motion visitors see, so it must read on its own. They play on first view, on the replay button, and when the terminal sends a `play` effect (`trace`, or `cat` of an approach file) through `ConsoleProvider.playDiagram`. `Approach` is a server component, so it renders `<Diagram kind>`. Don't export plain objects from client modules for server use; they arrive as client references.
+- **Living system** (`src/components/living/`). The page behaves like one running backend:
+  - `EventField`: a canvas network behind the full-bleed hero. Packets hop node to node, the cursor lights nodes and injects traffic, and every terminal command dispatches `CONSOLE_EVENT` to fire a burst from the terminal. It draws one still frame, then animates only after `requestIdleCallback`. It caps DPR at 1.5, runs at 30fps on phones, and pauses off-screen. Don't reintroduce `shadowBlur` (the glow is a double stroke); it cost ~450ms TBT on mobile.
+  - `Bus`: the vertical line in the left gutter of everything below the hero. Its head follows the scroll. Any `[data-port]` in the same wrapper is a port, levelled with its `[data-port-anchor]` if it has one. When the head passes, the port gets `data-landed`, which reveals its `[data-reveal]` children (stagger via `--i`). Don't nest ports. Hidden states only apply under `html.js` (set by an inline script in layout) and `prefers-reduced-motion: no-preference`, so no-JS, crawlers and reduced motion always see everything.
+  - `IraqMap`: a server component that projects Natural Earth (world-atlas, public domain) at build time; nothing map-related ships to the client. The CORE hub in Baghdad dispatches to the 17 other governorate capitals, using CSS keyed off the band's `data-landed`. It shows no OPDC numbers, per the content rules.
+  - `PointerFx`: one pointer listener feeding `--mx/--my` to `[data-spotlight]` cards (CSS glow edge).
 - Footer BUILD/DEPLOYED come from `env` in `next.config.ts` (Vercel SHA, else `git rev-parse`), fixed at build time.
 
 Git: the remote is `aliyass2/portfolioweb` (personal account) over the `github-personal` SSH host alias. The commit identity is set repo-locally to the aliyass2 noreply email. Never use the work account (`ali-kareem_ISCQI`), which is the globally active `gh` account. For `gh` calls on this repo, prefix them with `GH_TOKEN=$(gh auth token --user aliyass2)`.
@@ -47,7 +52,8 @@ Ignore the `<x-dc>`, `<helmet>`, `<sc-for>` wrappers and the `support.js` script
 
 - Do NOT mention: Spawn (any side venture), Earthlink, ISP/network support work.
 - Do NOT publish numbers for Qi Card / OPDC work (no transaction counts, tenants, users). ScopeSky scale is described as "nationwide", not with exact counts.
-- No emoji, no stock illustrations, no gradients, no drop shadows, no 3D models.
+- No emoji, no stock illustrations, no 3D models.
+- **Revised 2026-10-25 (owner's call, overrides the artboards):** the faithful build read as "boring, static and rigid". Allowed now: amber glow/blur on live elements (packets, active nodes, CTA hover, the bus head), full-bleed and broken-grid layouts, and cursor/scroll reactivity. Still no decorative gradients beyond readability vignettes, and still no non-accent glow.
 - Copy is terse and declarative. Use the copy in the artboards verbatim unless it is a placeholder in [BRACKETS].
 - Placeholders to wire to real values: [GIT SHA], [DATE] in the footer (from the build), CV link → `/cv.pdf`.
 
@@ -73,7 +79,7 @@ Type:
 
 - Sans: IBM Plex Sans (400, 500, 600) — display and body. Headings weight 500, tracking -0.02 to -0.025em. Never bold headings.
 - Mono: IBM Plex Mono (400, 500) — every label, eyebrow, stack line, log line, terminal, diagram node.
-- Scale: H1 64 / H2 40 / H3 20–28 / body 15–19 (line-height 1.55–1.65) / eyebrow 12 uppercase tracking 0.12em / mono label 10–11.5.
+- Scale (as built after 2026-10-25): H1 clamp(56px, 5.3vw, 78px) / H2 56 (set once in `ui.tsx` `H2`) / H3 20–34 / body 15–19 (line-height 1.55–1.65) / eyebrow 12 uppercase tracking 0.12em / mono label 10–11.5.
 - Phone: H1 38, H2 28, section padding 56–72.
 
 Spacing & shape: radius 4 (buttons, chips) and 6 (cards, panels). Gaps 8 / 12 / 24 / 48. Section padding 112 desktop. Max content width 1200 with 32px gutters. Structure comes from 1px hairlines and grid gaps, not shadows.
@@ -140,7 +146,7 @@ Accessibility: real `<input>` with `aria-label`, `aria-live="polite"` on the out
 - Footer build SHA and deploy date from the build (Vercel env or git).
 - Section eyebrows as paths.
 
-Nothing else. No particle backgrounds, no cursors, no 3D.
+Superseded on 2026-10-25 by the "living system" direction (see "Living system" below). No custom cursors, no 3D.
 
 ## Build plan
 
